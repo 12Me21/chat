@@ -14,5 +14,5 @@ Tested on Lua 5.2
 change `0` to `1`
 
 If not, you'll get an error when trying to connect:  
-`/usr/local/share/lua/<version>/http/websocket.lua:282: read: Connection timed out`  
+`<path>/http/websocket.lua:282: read: Connection timed out`  
 (If you can't find the library location, you can use this error to get the file path)
