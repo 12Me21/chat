@@ -3,4 +3,5 @@ local websocket = dofile "websocket.lua"
 
 local auth, uid = get_auth()
 websocket.start(auth, uid)
+websocket.test()
 
