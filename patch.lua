@@ -8,18 +8,18 @@ local function base64_sha1(str)
 	return basexx.to_base64(digest.new("sha1"):final(str))
 end
 
-local function getvarvalue(func, name)
-	i = 1
-	while true do
+local function find_upvalue(func, name)
+	local i = 1
+	while 1 do
 		local n, v = debug.getupvalue(func, i)
 		if not n then break end
-		if n == name then return v end
+		if n == name then return v, i end
 		i = i + 1
 	end
 end
 
 return function(Websocket)
-	local handle_websocket_response = getvarvalue(Websocket.methods.connect, "handle_websocket_response")
+	local handle_websocket_response = find_upvalue(Websocket.methods.connect, "handle_websocket_response")
 	function Websocket.methods:connect(timeout)
 		assert(self.type == "client" and self.readyState == 0)
 		local headers, stream, errno = self.request:go(timeout)
@@ -30,3 +30,5 @@ return function(Websocket)
 		return handle_websocket_response(self, headers, stream)
 	end
 end
+
+		
