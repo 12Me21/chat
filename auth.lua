@@ -32,7 +32,7 @@ local function session2auth(session)
    if data.result then
       return data.result
    else
-      print("Failed to get chat auth:")
+      print("Failed to get chat auth: (probably invalid session)")
       for _,err in ipairs(data.errors) do
          print('"'..err..'"')
       end
